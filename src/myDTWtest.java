@@ -16,7 +16,7 @@ import fr.enseeiht.danck.voice_analyzer.WindowMaker;
 public class myDTWtest {
 
     public static final String[] vocabulaire = {"arretetoi","avance","droite",
-			"faisunflip","gauche","recule","tournedroite","tournegauche","penduleinverse"};
+			"faisunflip","gauche","recule","tournedroite","tournegauche"/*,"penduleinverse"*/};
     
     public static final String lbRep="/test_res/audio/csv/";
     
@@ -97,7 +97,9 @@ public class myDTWtest {
 		
 		for (int i=0;i<liste.length;++i)
 			for (int j=0;j<vocabulaire.length;++j)	
-				if ( liste[i].contains(vocabulaire[j]) ){
+				if ( liste[i].contains(vocabulaire[j]) && !liste[i].contains("tourne"+vocabulaire[j]) ){
+				// la deuxième condition est nécessaire pour ne pas inclure les fields des fichiers tournedroite,par
+				// example, dans l'ensemble des fields de droite
 					Set <Field> set=lb.get(vocabulaire[j]);
 					set.add(getField(lbRep,liste[i]));
 					lb.put(vocabulaire[j], set );  
