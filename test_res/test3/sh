@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+for ligne in `ls $1` 
+        do
+        chmod +777 "./"$1"/$ligne"     
+                if [ -e ./"$1"/"$ligne" ]
+                then          
+                         sox "./"$1"/$ligne" temp.dat && (grep -v ";" temp.dat |awk '{print $2}' > "$(basename "$ligne" .wav)".csv) && rm temp.dat 
+                 fi
+                
+done 
+
+exit 0
+ 
